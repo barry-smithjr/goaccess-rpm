@@ -17,11 +17,7 @@ Source0:        https://tar.goaccess.io/%{name}-%{version}.tar.gz
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  gcc
-%if 0%{?fedora} > 36
 BuildRequires:  libmaxminddb-devel
-%else
-BuildRequires:  GeoIP-devel
-%endif
 BuildRequires:  ncurses-devel
 BuildRequires:  gettext-devel
 %if %{with openssl}
@@ -79,11 +75,7 @@ sed -i '/-pthread/d' configure.ac
 # %%configure --enable-debug --enable-geoip --enable-utf8 --enable-tcb=btree --with-getline
 %configure \
     --enable-debug \
-%if 0%{?fedora} > 36
     --enable-geoip=mmdb \
-%else     
-    --enable-geoip=legacy \
-%endif
     --enable-utf8 \
     --with-getline \
     %{?with_openssl: --with-openssl}
